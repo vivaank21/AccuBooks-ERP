@@ -1,0 +1,20 @@
+﻿AccuBooks ERP
+1.0.0.0
+
+winexe
+C#
+.cs
+D:\zip\C#\AccuBooks ERP\obj\Debug\net10.0-windows\
+AccuBooks_ERP
+none
+false
+TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+D:\zip\C#\AccuBooks ERP\App.xaml
+25536577645
+23104565698
+45-1585877156
+2611046794412
+GUI\Accounting\JournalEntryView.xaml;GUI\Accounting\LedgerView.xaml;GUI\Authentication\LoginWindow.xaml;GUI\CustomDialogs\CustomerEditDialog.xaml;GUI\CustomDialogs\ProductEditDialog.xaml;GUI\CustomDialogs\SupplierEditDialog.xaml;GUI\Dashboard\DashboardView.xaml;GUI\GST\GstReportView.xaml;GUI\Inventory\StockView.xaml;GUI\Masters\Customer\CustomerMasterView.xaml;GUI\Masters\Product\ProductMasterView.xaml;GUI\Masters\Supplier\SupplierMasterView.xaml;GUI\Purchase\PurchaseInvoiceView.xaml;GUI\Sales\SalesInvoiceView.xaml;GUI\Settings\CompanySettingsView.xaml;GUI\Splash\SplashScreen.xaml;GUI\Utilities\BackupRestoreView.xaml;MainWindow.xaml;Resources\Styles\Buttons.xaml;Resources\Styles\DataGrid.xaml;Resources\Styles\Dialogs.xaml;Resources\Styles\TextBoxes.xaml;Resources\Styles\Typography.xaml;Resources\Themes\DarkTheme.xaml;Resources\Themes\LightTheme.xaml;
+
+False
+

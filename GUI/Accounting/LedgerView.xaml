@@ -1,0 +1,120 @@
+<UserControl x:Class="AccuBooks_ERP.GUI.Accounting.LedgerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1100">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header -->
+            <RowDefinition Height="*"/>    <!-- Tabs for Ledger, Trial Balance, P&L -->
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="General Ledger &amp; Financial Statements" Style="{DynamicResource HeaderPageTitle}"/>
+                <TextBlock Text="Automated Trial Balance, Account Ledger drilldown, and Profit &amp; Loss reporting" Style="{DynamicResource HeaderPageSubtitle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button x:Name="btnExport" Content="📊 Export Report" Style="{DynamicResource BtnOutline}" Margin="0,0,10,0" Click="BtnExport_Click"/>
+                <Button x:Name="btnRefresh" Content="🔄 Refresh Data" Style="{DynamicResource BtnPrimary}" Click="BtnRefresh_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Tabs -->
+        <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0">
+            <!-- Tab 1: Account Ledger Statement -->
+            <TabItem Header="📖 Account Ledger Statement" FontSize="14" FontWeight="SemiBold">
+                <Grid Margin="0,12,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Style="{DynamicResource ModernCard}" Margin="0,0,0,12" Padding="12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Select Account Head" Style="{DynamicResource FieldLabel}"/>
+                                <ComboBox x:Name="cmbLedgerAccount" DisplayMemberPath="AccountName" SelectedValuePath="Id" SelectionChanged="CmbLedgerAccount_SelectionChanged"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="From Date" Style="{DynamicResource FieldLabel}"/>
+                                <DatePicker x:Name="dpFromDate"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="To Date" Style="{DynamicResource FieldLabel}"/>
+                                <DatePicker x:Name="dpToDate"/>
+                            </StackPanel>
+
+                            <Button Grid.Column="6" Content="Load Ledger" Style="{DynamicResource BtnPrimary}" VerticalAlignment="Bottom" Height="34" Click="BtnLoadLedger_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="1" Style="{DynamicResource ModernCard}">
+                        <DataGrid x:Name="dgLedgerLines">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd-MMM-yyyy}" Width="110"/>
+                                <DataGridTextColumn Header="Voucher #" Binding="{Binding VoucherNumber}" Width="130"/>
+                                <DataGridTextColumn Header="Particulars / Narration" Binding="{Binding Narration}" Width="2*"/>
+                                <DataGridTextColumn Header="Debit (Dr)" Binding="{Binding Debit, StringFormat=₹ {0:N2}}" Width="120"/>
+                                <DataGridTextColumn Header="Credit (Cr)" Binding="{Binding Credit, StringFormat=₹ {0:N2}}" Width="120"/>
+                                <DataGridTextColumn Header="Balance" Binding="{Binding RunningBalance, StringFormat=₹ {0:N2}}" Width="130"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Tab 2: Trial Balance -->
+            <TabItem Header="⚖️ Trial Balance" FontSize="14" FontWeight="SemiBold">
+                <Border Style="{DynamicResource ModernCard}" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" x:Name="dgTrialBalance">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Account Code" Binding="{Binding AccountCode}" Width="110"/>
+                                <DataGridTextColumn Header="Account Name" Binding="{Binding AccountName}" Width="2*"/>
+                                <DataGridTextColumn Header="Account Group" Binding="{Binding GroupName}" Width="1.5*"/>
+                                <DataGridTextColumn Header="Debit Balance" Binding="{Binding DebitBalance, StringFormat=₹ {0:N2}}" Width="140"/>
+                                <DataGridTextColumn Header="Credit Balance" Binding="{Binding CreditBalance, StringFormat=₹ {0:N2}}" Width="140"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Border Grid.Row="1" Padding="12" Background="{DynamicResource CardHoverBackgroundBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0">
+                            <DockPanel>
+                                <TextBlock Text="Total Trial Balance:" Style="{DynamicResource SectionHeader}" DockPanel.Dock="Left"/>
+                                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                    <TextBlock x:Name="lblTrialTotalDebit" Text="Dr: ₹ 0.00" Style="{DynamicResource SectionHeader}" Foreground="{DynamicResource SuccessBrush}" Margin="0,0,20,0"/>
+                                    <TextBlock x:Name="lblTrialTotalCredit" Text="Cr: ₹ 0.00" Style="{DynamicResource SectionHeader}" Foreground="{DynamicResource WarningBrush}"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

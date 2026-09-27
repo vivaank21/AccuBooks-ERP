@@ -1,0 +1,439 @@
+﻿<Window x:Class="AccuBooks_ERP.GUI.Splash.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+
+        Title="AccuBooks ERP"
+        Width="960"
+        Height="580"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False">
+
+    <Window.Resources>
+
+        <!-- ================================================= -->
+        <!-- PALETTE                                             -->
+        <!-- Deep navy base, azure primary, cyan accent, gold    -->
+        <!-- highlight reserved for finance/ERP premium feel     -->
+        <!-- ================================================= -->
+
+        <!-- Window backdrop -->
+        <LinearGradientBrush x:Key="WindowBackground" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#060B14" Offset="0"/>
+            <GradientStop Color="#0C1A2E" Offset="0.45"/>
+            <GradientStop Color="#122A47" Offset="0.8"/>
+            <GradientStop Color="#0E3452" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Card fill -->
+        <LinearGradientBrush x:Key="CardBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#182642" Offset="0"/>
+            <GradientStop Color="#131E36" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Gradient hairline border for the card (creates a subtle glass edge) -->
+        <LinearGradientBrush x:Key="CardBorderBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#3D6FA8" Offset="0"/>
+            <GradientStop Color="#1D3A5C" Offset="0.5"/>
+            <GradientStop Color="#2FA8C9" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Logo ring -->
+        <RadialGradientBrush x:Key="LogoGlow" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.55" RadiusY="0.55">
+            <GradientStop Color="#552FA8FF" Offset="0"/>
+            <GradientStop Color="#0022D3EE" Offset="0.7"/>
+            <GradientStop Color="#0022D3EE" Offset="1"/>
+        </RadialGradientBrush>
+
+        <LinearGradientBrush x:Key="LogoRingBorder" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#2E7BF6" Offset="0"/>
+            <GradientStop Color="#22D3EE" Offset="1"/>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="LogoContainerFill" Color="#1A2A46"/>
+
+        <!-- Primary accent -->
+        <LinearGradientBrush x:Key="PrimaryBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#2E7BF6" Offset="0"/>
+            <GradientStop Color="#22D3EE" Offset="1"/>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="AccentGold" Color="#D9A84E"/>
+
+        <SolidColorBrush x:Key="HeadingText" Color="#F3F7FC"/>
+        <SolidColorBrush x:Key="SecondaryText" Color="#AFC3DC"/>
+        <SolidColorBrush x:Key="FooterText" Color="#6E84A2"/>
+        <SolidColorBrush x:Key="TrackBrush" Color="#1E2C46"/>
+        <SolidColorBrush x:Key="DividerBrush" Color="#22314E"/>
+
+        <!-- Reusable glow effect for the card -->
+        <DropShadowEffect x:Key="CardShadow"
+                           BlurRadius="45"
+                           ShadowDepth="0"
+                           Color="#000000"
+                           Opacity="0.6"/>
+
+        <DropShadowEffect x:Key="LogoShadow"
+                           BlurRadius="30"
+                           ShadowDepth="0"
+                           Color="#2E7BF6"
+                           Opacity="0.55"/>
+
+        <!-- Loading dot style, animated via Storyboard with staggered BeginTime -->
+        <Style x:Key="LoadingDot" TargetType="Ellipse">
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="Height" Value="6"/>
+            <Setter Property="Fill" Value="{StaticResource AccentGold}"/>
+            <Setter Property="Margin" Value="3,0,0,0"/>
+            <Setter Property="Opacity" Value="0.25"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        </Style>
+
+    </Window.Resources>
+
+    <!-- ================================================= -->
+    <!-- ENTRANCE ANIMATION (card fades + rises into place)  -->
+    <!-- ================================================= -->
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+
+                    <!-- Card fade + rise -->
+                    <DoubleAnimation Storyboard.TargetName="RootCard"
+                                      Storyboard.TargetProperty="Opacity"
+                                      From="0" To="1" Duration="0:0:0.6">
+                        <DoubleAnimation.EasingFunction>
+                            <QuadraticEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+
+                    <DoubleAnimation Storyboard.TargetName="CardTransform"
+                                      Storyboard.TargetProperty="Y"
+                                      From="18" To="0" Duration="0:0:0.6">
+                        <DoubleAnimation.EasingFunction>
+                            <QuadraticEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+
+                    <!-- Logo scale-in with slight overshoot -->
+                    <DoubleAnimation Storyboard.TargetName="LogoScale"
+                                      Storyboard.TargetProperty="ScaleX"
+                                      From="0.85" To="1" Duration="0:0:0.7" BeginTime="0:0:0.1">
+                        <DoubleAnimation.EasingFunction>
+                            <BackEase EasingMode="EaseOut" Amplitude="0.4"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="LogoScale"
+                                      Storyboard.TargetProperty="ScaleY"
+                                      From="0.85" To="1" Duration="0:0:0.7" BeginTime="0:0:0.1">
+                        <DoubleAnimation.EasingFunction>
+                            <BackEase EasingMode="EaseOut" Amplitude="0.4"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+
+                    <!-- Slow, continuous pulse on the logo glow ring -->
+                    <DoubleAnimation Storyboard.TargetName="LogoGlowEllipse"
+                                      Storyboard.TargetProperty="Opacity"
+                                      From="0.35" To="0.85" Duration="0:0:1.6"
+                                      AutoReverse="True" RepeatBehavior="Forever" BeginTime="0:0:0.4"/>
+
+                    <!-- Staggered fade-up for the tagline, loading text, and progress block -->
+                    <DoubleAnimation Storyboard.TargetName="TaglineBlock"
+                                      Storyboard.TargetProperty="Opacity"
+                                      From="0" To="1" Duration="0:0:0.5" BeginTime="0:0:0.35"/>
+
+                    <DoubleAnimation Storyboard.TargetName="StatusPanel"
+                                      Storyboard.TargetProperty="Opacity"
+                                      From="0" To="1" Duration="0:0:0.5" BeginTime="0:0:0.45"/>
+
+                    <DoubleAnimation Storyboard.TargetName="ProgressPanel"
+                                      Storyboard.TargetProperty="Opacity"
+                                      From="0" To="1" Duration="0:0:0.5" BeginTime="0:0:0.55"/>
+
+                    <DoubleAnimation Storyboard.TargetName="FooterPanel"
+                                      Storyboard.TargetProperty="Opacity"
+                                      From="0" To="1" Duration="0:0:0.5" BeginTime="0:0:0.65"/>
+
+                    <!-- Loading dots: continuous staggered blink -->
+                    <DoubleAnimation Storyboard.TargetName="Dot1" Storyboard.TargetProperty="Opacity"
+                                      From="0.2" To="1" Duration="0:0:0.5"
+                                      AutoReverse="True" RepeatBehavior="Forever" BeginTime="0:0:0.8"/>
+                    <DoubleAnimation Storyboard.TargetName="Dot2" Storyboard.TargetProperty="Opacity"
+                                      From="0.2" To="1" Duration="0:0:0.5"
+                                      AutoReverse="True" RepeatBehavior="Forever" BeginTime="0:0:1.0"/>
+                    <DoubleAnimation Storyboard.TargetName="Dot3" Storyboard.TargetProperty="Opacity"
+                                      From="0.2" To="1" Duration="0:0:0.5"
+                                      AutoReverse="True" RepeatBehavior="Forever" BeginTime="0:0:1.2"/>
+
+                    <!-- Shimmer sweep across the progress fill -->
+                    <DoubleAnimation Storyboard.TargetName="ShimmerTransform"
+                                      Storyboard.TargetProperty="X"
+                                      From="-120" To="780" Duration="0:0:1.4"
+                                      RepeatBehavior="Forever" BeginTime="0:0:0.7"/>
+
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid Background="{StaticResource WindowBackground}">
+
+        <!-- Faint decorative accent glows in the backdrop corners for depth -->
+        <Ellipse Width="420" Height="420" HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="-160,-160,0,0" Opacity="0.25">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#2E7BF6" Offset="0"/>
+                    <GradientStop Color="#002E7BF6" Offset="1"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <Ellipse Width="380" Height="380" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                  Margin="0,0,-140,-140" Opacity="0.22">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#22D3EE" Offset="0"/>
+                    <GradientStop Color="#0022D3EE" Offset="1"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <!-- ========================================================= -->
+        <!-- CARD  (gradient hairline border achieved via nested Border) -->
+        <!-- ========================================================= -->
+
+        <Border x:Name="RootCard"
+                Margin="30"
+                CornerRadius="26"
+                Background="{StaticResource CardBorderBrush}"
+                Effect="{StaticResource CardShadow}"
+                Opacity="0"
+                RenderTransformOrigin="0.5,0.5">
+
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="CardTransform" Y="18"/>
+            </Border.RenderTransform>
+
+            <!-- Inner border inset by 1.4px reveals the outer gradient as a slim glowing edge -->
+            <Border CornerRadius="25"
+                    Margin="1.4"
+                    Background="{StaticResource CardBackground}">
+
+                <Grid Margin="0,10,0,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3.4*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- ========================= -->
+                    <!-- Logo Section -->
+                    <!-- ========================= -->
+
+                    <StackPanel Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+                        <Grid Width="190" Height="190" RenderTransformOrigin="0.5,0.5">
+
+                            <Grid.RenderTransform>
+                                <ScaleTransform x:Name="LogoScale" ScaleX="0.85" ScaleY="0.85"/>
+                            </Grid.RenderTransform>
+
+                            <!-- Soft pulsing glow behind the logo -->
+                            <Ellipse x:Name="LogoGlowEllipse"
+                                     Width="210" Height="210"
+                                     Fill="{StaticResource LogoGlow}"
+                                     Opacity="0.35"/>
+
+                            <!-- Logo ring with gradient border -->
+                            <Border Width="176" Height="176"
+                                    CornerRadius="88"
+                                    Background="{StaticResource LogoContainerFill}"
+                                    BorderBrush="{StaticResource LogoRingBorder}"
+                                    BorderThickness="1.6"
+                                    Effect="{StaticResource LogoShadow}">
+
+                                <Image Stretch="Uniform"
+                                       Source="/Resources/Logo/Logo.png"
+                                       Margin="26"/>
+
+                            </Border>
+
+                        </Grid>
+
+                        <TextBlock x:Name="TaglineBlock"
+                                   Margin="0,26,0,0"
+                                   Text="Smart Accounting. Smarter Business."
+                                   FontSize="18"
+                                   FontFamily="Segoe UI Semibold"
+                                   Foreground="{StaticResource HeadingText}"
+                                   HorizontalAlignment="Center"
+                                   Opacity="0"/>
+
+                    </StackPanel>
+
+                    <!-- ========================= -->
+                    <!-- Loading / Status Text -->
+                    <!-- ========================= -->
+
+                    <StackPanel x:Name="StatusPanel"
+                                Grid.Row="1"
+                                Margin="0,8,0,14"
+                                HorizontalAlignment="Center"
+                                Opacity="0">
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                            <TextBlock x:Name="txtLoading"
+                                       Text="Initializing Application"
+                                       FontSize="15"
+                                       FontFamily="Segoe UI"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       VerticalAlignment="Center"/>
+
+                            <!-- Animated ellipsis -->
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,0" VerticalAlignment="Center">
+                                <Ellipse x:Name="Dot1" Style="{StaticResource LoadingDot}"/>
+                                <Ellipse x:Name="Dot2" Style="{StaticResource LoadingDot}"/>
+                                <Ellipse x:Name="Dot3" Style="{StaticResource LoadingDot}"/>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <TextBlock Margin="0,8,0,0"
+                                   Text="Please wait while AccuBooks ERP prepares your workspace."
+                                   FontSize="12"
+                                   FontFamily="Segoe UI"
+                                   Foreground="{StaticResource FooterText}"
+                                   HorizontalAlignment="Center"/>
+
+                    </StackPanel>
+
+                    <!-- ========================= -->
+                    <!-- Progress Area -->
+                    <!-- ========================= -->
+
+                    <StackPanel x:Name="ProgressPanel"
+                                Grid.Row="2"
+                                Margin="70,0,70,20"
+                                Opacity="0">
+
+                        <Border Height="10"
+                                Background="{StaticResource TrackBrush}"
+                                CornerRadius="5"
+                                ClipToBounds="True">
+
+                            <Grid>
+
+                                <!-- Progress Fill: width is set/animated from code-behind via ProgressFill.Width -->
+                                <Border x:Name="ProgressFill"
+                                        Width="0"
+                                        MaxWidth="780"
+                                        HorizontalAlignment="Left"
+                                        CornerRadius="5"
+                                        Background="{StaticResource PrimaryBrush}"
+                                        ClipToBounds="True">
+
+                                    <!-- Shimmer sweep overlay for a premium "active" feel -->
+                                    <Rectangle Width="70" Opacity="0.55" RenderTransformOrigin="0.5,0.5">
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#00FFFFFF" Offset="0"/>
+                                                <GradientStop Color="#66FFFFFF" Offset="0.5"/>
+                                                <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                        <Rectangle.RenderTransform>
+                                            <TranslateTransform x:Name="ShimmerTransform" X="-120"/>
+                                        </Rectangle.RenderTransform>
+                                    </Rectangle>
+
+                                </Border>
+
+                            </Grid>
+
+                        </Border>
+
+                        <DockPanel Margin="0,10,0,0">
+
+                            <TextBlock x:Name="txtStage"
+                                       Text="Loading modules..."
+                                       Foreground="{StaticResource FooterText}"
+                                       FontSize="12"
+                                       FontFamily="Segoe UI"
+                                       DockPanel.Dock="Left"/>
+
+                            <TextBlock x:Name="txtPercentage"
+                                       Text="0%"
+                                       Foreground="{StaticResource HeadingText}"
+                                       FontWeight="SemiBold"
+                                       FontFamily="Segoe UI Semibold"
+                                       FontSize="13"
+                                       DockPanel.Dock="Right"
+                                       HorizontalAlignment="Right"/>
+
+                        </DockPanel>
+
+                    </StackPanel>
+
+                    <!-- Divider -->
+                    <Border Grid.Row="3"
+                            Height="1"
+                            Margin="30,0,30,14"
+                            Background="{StaticResource DividerBrush}"/>
+
+                    <!-- ========================= -->
+                    <!-- Footer -->
+                    <!-- ========================= -->
+
+                    <Grid x:Name="FooterPanel"
+                          Grid.Row="4"
+                          Margin="30,0,30,20"
+                          Opacity="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse Width="6" Height="6" Fill="{StaticResource AccentGold}" VerticalAlignment="Center"/>
+                            <TextBlock Margin="8,0,0,0"
+                                       Text="Version 1.0.0"
+                                       FontSize="12"
+                                       FontFamily="Segoe UI"
+                                       Foreground="{StaticResource FooterText}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <TextBlock Grid.Column="1"
+                                   Text="© 2026 AccuBooks ERP · All Rights Reserved"
+                                   FontSize="12"
+                                   FontFamily="Segoe UI"
+                                   Foreground="{StaticResource FooterText}"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+        </Border>
+
+    </Grid>
+
+</Window>

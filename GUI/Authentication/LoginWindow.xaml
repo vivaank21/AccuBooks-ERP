@@ -1,0 +1,77 @@
+<Window x:Class="AccuBooks_ERP.GUI.Authentication.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AccuBooks ERP - Login"
+        Height="540" Width="440"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseDown="Window_MouseDown">
+
+    <Border Style="{DynamicResource DialogCard}" Margin="20" Background="{DynamicResource CardBackgroundBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Close Button -->
+                <RowDefinition Height="Auto"/> <!-- Logo & Title -->
+                <RowDefinition Height="*"/>    <!-- Form -->
+                <RowDefinition Height="Auto"/> <!-- Footer -->
+            </Grid.RowDefinitions>
+
+            <!-- Close Button -->
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="{DynamicResource TextSecondaryBrush}"
+                    Content="✕"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Cursor="Hand"
+                    Click="BtnClose_Click"/>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,25">
+                <Border Width="64" Height="64" CornerRadius="32" Background="{DynamicResource AppBackgroundBrush}" BorderBrush="{DynamicResource PrimaryBrush}" BorderThickness="1.5" HorizontalAlignment="Center">
+                    <Image Source="/Resources/Logo/Logo.png" Margin="10"/>
+                </Border>
+                <TextBlock Text="AccuBooks ERP" Style="{DynamicResource HeaderPageTitle}" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+                <TextBlock Text="Sign in to your enterprise account" Style="{DynamicResource HeaderPageSubtitle}" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Form -->
+            <StackPanel Grid.Row="2" VerticalAlignment="Center">
+                <!-- Username -->
+                <TextBlock Text="Username / Email" Style="{DynamicResource FieldLabel}"/>
+                <TextBox x:Name="txtUsername" Text="admin" Margin="0,0,0,16"/>
+
+                <!-- Password -->
+                <TextBlock Text="Password" Style="{DynamicResource FieldLabel}"/>
+                <PasswordBox x:Name="txtPassword" Password="admin123" Margin="0,0,0,16"/>
+
+                <!-- Error / Status Message -->
+                <TextBlock x:Name="txtError"
+                           Text=""
+                           Foreground="{DynamicResource DangerBrush}"
+                           FontSize="12"
+                           FontFamily="Segoe UI Semibold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,12"
+                           Visibility="Collapsed"/>
+
+                <!-- Login Button -->
+                <Button x:Name="btnLogin"
+                        Content="Sign In"
+                        Style="{DynamicResource BtnPrimary}"
+                        Height="40"
+                        Click="BtnLogin_Click"/>
+            </StackPanel>
+
+            <!-- Footer -->
+            <StackPanel Grid.Row="3" Margin="0,15,0,0" HorizontalAlignment="Center">
+                <TextBlock Text="Default Admin: admin / admin123" Style="{DynamicResource MetricLabel}" HorizontalAlignment="Center"/>
+                <TextBlock Text="© 2026 AccuBooks ERP. All rights reserved." FontSize="11" Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

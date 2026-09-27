@@ -1,0 +1,72 @@
+<UserControl x:Class="AccuBooks_ERP.GUI.Utilities.BackupRestoreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1100">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <TextBlock Text="Database Backup &amp; Disaster Recovery" Style="{DynamicResource HeaderPageTitle}"/>
+            <TextBlock Text="Safeguard your enterprise financial ledger with compressed backups and quick restore" Style="{DynamicResource HeaderPageSubtitle}"/>
+        </StackPanel>
+
+        <!-- Backup & Restore Cards -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Card 1: Backup -->
+            <Border Grid.Column="0" Style="{DynamicResource ModernCard}" Padding="24">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="💾 Create Database Backup" Style="{DynamicResource SectionHeader}" Foreground="{DynamicResource PrimaryBrush}"/>
+                    <TextBlock Text="Creates an encrypted/compressed snapshot (.db.zip) of all customers, invoices, products, stock history, and double-entry journals."
+                               Style="{DynamicResource BodySecondary}" TextWrapping="Wrap" Margin="0,10,0,20"/>
+
+                    <TextBlock Text="Target Backup Directory:" Style="{DynamicResource FieldLabel}"/>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtBackupPath" IsReadOnly="True"/>
+                        <Button Grid.Column="1" Content="Browse..." Style="{DynamicResource BtnOutline}" Margin="8,0,0,0" Click="BtnBrowseBackup_Click"/>
+                    </Grid>
+
+                    <Button x:Name="btnCreateBackup" Content="Create Instant Backup" Style="{DynamicResource BtnPrimary}" Height="40" Click="BtnCreateBackup_Click"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Card 2: Restore -->
+            <Border Grid.Column="2" Style="{DynamicResource ModernCard}" Padding="24">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="🔄 Restore Database" Style="{DynamicResource SectionHeader}" Foreground="{DynamicResource WarningBrush}"/>
+                    <TextBlock Text="Restore from a previously exported backup archive. The current active database will be automatically preserved as a fallback."
+                               Style="{DynamicResource BodySecondary}" TextWrapping="Wrap" Margin="0,10,0,20"/>
+
+                    <TextBlock Text="Select Backup File (.zip):" Style="{DynamicResource FieldLabel}"/>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtRestoreFilePath" IsReadOnly="True"/>
+                        <Button Grid.Column="1" Content="Browse..." Style="{DynamicResource BtnOutline}" Margin="8,0,0,0" Click="BtnBrowseRestore_Click"/>
+                    </Grid>
+
+                    <Button x:Name="btnRestoreDatabase" Content="Restore Database" Style="{DynamicResource BtnDanger}" Height="40" Click="BtnRestoreDatabase_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

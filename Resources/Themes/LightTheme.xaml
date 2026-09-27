@@ -1,0 +1,56 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Backgrounds -->
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F8FAFC"/>
+    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="CardHoverBackgroundBrush" Color="#F1F5F9"/>
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="#F8FAFC"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#E2E8F0"/>
+    <SolidColorBrush x:Key="DividerBrush" Color="#E2E8F0"/>
+
+    <!-- Accents & Brands -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#2563EB"/>
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#1D4ED8"/>
+    <SolidColorBrush x:Key="PrimaryActiveBrush" Color="#1E40AF"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="#64748B"/>
+    
+    <SolidColorBrush x:Key="SuccessBrush" Color="#10B981"/>
+    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#059669"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="#F59E0B"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="#EF4444"/>
+    <SolidColorBrush x:Key="DangerHoverBrush" Color="#DC2626"/>
+    <SolidColorBrush x:Key="CyanAccentBrush" Color="#0891B2"/>
+    <SolidColorBrush x:Key="PurpleAccentBrush" Color="#7C3AED"/>
+
+    <!-- Gradients -->
+    <LinearGradientBrush x:Key="PrimaryGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#2563EB" Offset="0"/>
+        <GradientStop Color="#0284C7" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="CardBorderGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#E2E8F0" Offset="0"/>
+        <GradientStop Color="#CBD5E1" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Typography -->
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#475569"/>
+    <SolidColorBrush x:Key="TextMutedBrush" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="TextOnPrimaryBrush" Color="#FFFFFF"/>
+
+    <!-- DataGrid -->
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush" Color="#F1F5F9"/>
+    <SolidColorBrush x:Key="DataGridRowBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DataGridRowAltBackgroundBrush" Color="#F8FAFC"/>
+    <SolidColorBrush x:Key="DataGridRowSelectedBrush" Color="#DBEAFE"/>
+    <SolidColorBrush x:Key="DataGridRowHoverBrush" Color="#EFF6FF"/>
+
+    <!-- Drop Shadows -->
+    <DropShadowEffect x:Key="CardDropShadow" BlurRadius="12" ShadowDepth="2" Color="#64748B" Opacity="0.12"/>
+    <DropShadowEffect x:Key="GlowPrimaryShadow" BlurRadius="12" ShadowDepth="0" Color="#2563EB" Opacity="0.3"/>
+
+</ResourceDictionary>

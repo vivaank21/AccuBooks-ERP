@@ -1,0 +1,117 @@
+<Window x:Class="AccuBooks_ERP.GUI.CustomDialogs.ProductEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Product Details"
+        Height="620" Width="640"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Border Style="{DynamicResource DialogCard}" Margin="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Title & Close -->
+                <RowDefinition Height="*"/>    <!-- Form Fields -->
+                <RowDefinition Height="Auto"/> <!-- Buttons -->
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <DockPanel Grid.Row="0" Margin="0,0,0,16">
+                <TextBlock x:Name="lblTitle" Text="Add New Product" Style="{DynamicResource HeaderPageTitle}" FontSize="18" DockPanel.Dock="Left"/>
+                <Button Content="✕" Style="{DynamicResource BtnOutline}" Padding="8,2" DockPanel.Dock="Right" HorizontalAlignment="Right" Click="BtnCancel_Click"/>
+            </DockPanel>
+
+            <!-- Fields Form -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Product Name & Item Code -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,12">
+                        <TextBlock Text="Product Name *" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtName"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,12">
+                        <TextBlock Text="Item Code / SKU *" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtItemCode"/>
+                    </StackPanel>
+
+                    <!-- Barcode & Category -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
+                        <TextBlock Text="Barcode / EAN" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtBarcode"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,12">
+                        <TextBlock Text="Category" Style="{DynamicResource FieldLabel}"/>
+                        <ComboBox x:Name="cmbCategory" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                    </StackPanel>
+
+                    <!-- Unit & GST Tax Rate -->
+                    <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,12">
+                        <TextBlock Text="Unit of Measurement *" Style="{DynamicResource FieldLabel}"/>
+                        <ComboBox x:Name="cmbUnit" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="2" Margin="0,0,0,12">
+                        <TextBlock Text="GST Tax Rate *" Style="{DynamicResource FieldLabel}"/>
+                        <ComboBox x:Name="cmbTaxRate" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                    </StackPanel>
+
+                    <!-- Purchase Price & Selling Price -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,0,12">
+                        <TextBlock Text="Purchase Price (₹)" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtPurchasePrice" Text="0.00"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Grid.Column="2" Margin="0,0,0,12">
+                        <TextBlock Text="Selling Price (₹) *" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtSellingPrice" Text="0.00"/>
+                    </StackPanel>
+
+                    <!-- MRP & Opening Stock -->
+                    <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,0,0,12">
+                        <TextBlock Text="MRP (₹)" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtMRP" Text="0.00"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Grid.Column="2" Margin="0,0,0,12">
+                        <TextBlock Text="Opening Stock Quantity" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtOpeningStock" Text="0"/>
+                    </StackPanel>
+
+                    <!-- Min Stock Alert & Description -->
+                    <StackPanel Grid.Row="5" Grid.Column="0" Margin="0,0,0,12">
+                        <TextBlock Text="Low Stock Alert Threshold" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtMinAlert" Text="5"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Grid.Column="2" Margin="0,0,0,12">
+                        <TextBlock Text="HSN / SAC Code" Style="{DynamicResource FieldLabel}"/>
+                        <TextBox x:Name="txtHsnCode" Text="8471"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Cancel" Style="{DynamicResource BtnOutline}" Margin="0,0,10,0" Click="BtnCancel_Click"/>
+                <Button Content="Save Product" Style="{DynamicResource BtnPrimary}" Click="BtnSave_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

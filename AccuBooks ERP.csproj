@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RootNamespace>AccuBooks_ERP</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Logo\Logo.png" />
+    <Compile Remove="AccuBooks.Tests\**" />
+    <EmbeddedResource Remove="AccuBooks.Tests\**" />
+    <None Remove="AccuBooks.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="GUI\Authentication\" />
+    <Folder Include="GUI\Dashboard\" />
+    <Folder Include="GUI\Company\" />
+    <Folder Include="GUI\Masters\Customer\" />
+    <Folder Include="GUI\Masters\Category\" />
+    <Folder Include="GUI\Masters\Brand\" />
+    <Folder Include="GUI\Masters\HSN\" />
+    <Folder Include="GUI\Masters\Tax\" />
+    <Folder Include="GUI\Masters\Unit\" />
+    <Folder Include="GUI\Masters\Product\" />
+    <Folder Include="GUI\Masters\Supplier\" />
+    <Folder Include="GUI\Inventory\" />
+    <Folder Include="GUI\Accounting\" />
+    <Folder Include="GUI\Banking\" />
+    <Folder Include="GUI\GST\" />
+    <Folder Include="GUI\EInvoice\" />
+    <Folder Include="GUI\EWayBill\" />
+    <Folder Include="GUI\CustomDialogs\" />
+    <Folder Include="GUI\Utilities\" />
+    <Folder Include="GUI\Reports\" />
+    <Folder Include="GUI\Purchase\" />
+    <Folder Include="GUI\Sales\" />
+    <Folder Include="GUI\Settings\" />
+    <Folder Include="GetterNSetter\" />
+    <Folder Include="DAO\" />
+    <Folder Include="Database\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Resources\Icons\" />
+    <Folder Include="Resources\Images\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="Resources\Templates\" />
+    <Folder Include="Resources\Reports\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    <PackageReference Include="ClosedXML" Version="0.105.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Excelerator.ClosedXml" Version="1.1.6" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.5" />
+    <PackageReference Include="MaterialDesignColors" Version="5.3.2" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="QuestPDF" Version="2026.7.1" />
+    <PackageReference Include="Serilog" Version="4.4.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Logo\Logo.png" />
+  </ItemGroup>
+
+</Project>

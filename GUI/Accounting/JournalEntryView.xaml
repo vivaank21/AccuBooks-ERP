@@ -1,0 +1,133 @@
+<UserControl x:Class="AccuBooks_ERP.GUI.Accounting.JournalEntryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1100">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header -->
+            <RowDefinition Height="Auto"/> <!-- Voucher Details -->
+            <RowDefinition Height="Auto"/> <!-- Add Line Form -->
+            <RowDefinition Height="*"/>    <!-- Lines DataGrid -->
+            <RowDefinition Height="Auto"/> <!-- Totals & Post Button -->
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Double-Entry Journal Voucher" Style="{DynamicResource HeaderPageTitle}"/>
+                <TextBlock Text="Post manual accounting adjustments, opening entries, and financial transfers" Style="{DynamicResource HeaderPageSubtitle}"/>
+            </StackPanel>
+            <TextBlock x:Name="lblVoucherNumber" Grid.Column="1" Text="JV-2026-0001" Style="{DynamicResource SectionHeader}" Foreground="{DynamicResource PrimaryBrush}" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Voucher Details -->
+        <Border Grid.Row="1" Style="{DynamicResource ModernCard}" Margin="0,0,0,12" Padding="14">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Voucher Type" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="cmbVoucherType"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Voucher Date" Style="{DynamicResource FieldLabel}"/>
+                    <DatePicker x:Name="dpVoucherDate"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4">
+                    <TextBlock Text="Narration / Description" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="txtNarration"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Add Line Card -->
+        <Border Grid.Row="2" Style="{DynamicResource ModernCard}" Margin="0,0,0,12" Padding="12" Background="{DynamicResource CardHoverBackgroundBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Account Head" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="cmbAccountHead" DisplayMemberPath="AccountName" SelectedValuePath="Id"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Dr / Cr" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="cmbDrCr">
+                        <ComboBoxItem Content="Debit" IsSelected="True"/>
+                        <ComboBoxItem Content="Credit"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4">
+                    <TextBlock Text="Amount (₹)" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="txtLineAmount" Text="0.00" HorizontalContentAlignment="Right"/>
+                </StackPanel>
+
+                <Button Grid.Column="6" Content="+ Add Entry" Style="{DynamicResource BtnPrimary}" VerticalAlignment="Bottom" Height="34" Click="BtnAddLine_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Lines DataGrid -->
+        <Border Grid.Row="3" Style="{DynamicResource ModernCard}" Margin="0,0,0,12">
+            <DataGrid x:Name="dgJournalLines">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Account Name" Binding="{Binding AccountHead.AccountName}" Width="2*"/>
+                    <DataGridTextColumn Header="Debit / Credit" Binding="{Binding Type}" Width="110"/>
+                    <DataGridTextColumn Header="Debit Amount" Binding="{Binding DebitDisplay, StringFormat=₹ {0:N2}}" Width="140"/>
+                    <DataGridTextColumn Header="Credit Amount" Binding="{Binding CreditDisplay, StringFormat=₹ {0:N2}}" Width="140"/>
+                    <DataGridTemplateColumn Header="Del" Width="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="✕" Style="{DynamicResource BtnDanger}" Padding="6,2" Click="BtnRemoveLine_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Bottom Totals & Submit -->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Total Debit: " Style="{DynamicResource BodyBold}"/>
+                <TextBlock x:Name="lblTotalDebit" Text="₹ 0.00" Style="{DynamicResource SectionHeader}" Foreground="{DynamicResource SuccessBrush}" Margin="0,0,25,0"/>
+
+                <TextBlock Text="Total Credit: " Style="{DynamicResource BodyBold}"/>
+                <TextBlock x:Name="lblTotalCredit" Text="₹ 0.00" Style="{DynamicResource SectionHeader}" Foreground="{DynamicResource WarningBrush}" Margin="0,0,25,0"/>
+
+                <TextBlock x:Name="lblDifference" Text="Diff: ₹ 0.00" Style="{DynamicResource BodyBold}" Foreground="{DynamicResource DangerBrush}"/>
+            </StackPanel>
+
+            <Button x:Name="btnPostVoucher" Grid.Column="1" Content="✓ Post Journal Voucher" Style="{DynamicResource BtnSuccess}" Height="40" Padding="20,8" Click="BtnPostVoucher_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>
